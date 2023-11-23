@@ -1,12 +1,8 @@
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
+const { Header, Content, Footer, Sider } = Layout;
 const AppFooter = () => {
     return (
-        <div style={{
-            background: "#ddd",
-            textAlign: "center",
-            padding: "5px 0"
-        }}>
-            Footer
-        </div>
+        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
     )
 }
 

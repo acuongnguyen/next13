@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import Link from 'next/link';
 import AppTable from '@/components/app.table';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   DesktopOutlined,
   FileOutlined,
@@ -14,14 +14,20 @@ import {
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import AppHeader from '@/components/app.header';
-
+import RootLayout from './layout';
+import AppSider from '@/components/app.sider';
+import AppHome from '@/components/app.home';
+import AppTaskDay from '@/components/app.taskday';
+import AppCompany from '@/components/app.company';
+import AppPersonal from '@/components/app.personal';
 const { Header, Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
-  label: React.ReactNode,
-  key: React.Key,
+  label?: React.ReactNode,
+  key?: React.Key,
+  href?: string,
   icon?: React.ReactNode,
   children?: MenuItem[],
 ): MenuItem {
@@ -29,20 +35,20 @@ function getItem(
     key,
     icon,
     children,
-    label,
+    label: href ? <Link href={href}>{label}</Link> : label,
   } as MenuItem;
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
+  getItem('Home', '1', '/', <PieChartOutlined />),
+  getItem('Blog', '2', '/blog', <DesktopOutlined />),
+  getItem('User', 'sub1', '', <UserOutlined />, [
     getItem('Tom', '3'),
     getItem('Bill', '4'),
     getItem('Alex', '5'),
   ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('Team', 'sub2', '', < TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+  getItem('Files', '9', '/#', <FileOutlined />),
 ];
 
 const App = () => {
@@ -54,24 +60,13 @@ const App = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-      </Sider>
-      <Layout>
-        {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
-        <AppHeader />
-        <Content style={{ margin: '0 16px' }}>
-          {/* <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb> */}
-          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-            Bill is a cat.
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
-      </Layout>
+      <Content style={{ margin: '0 16px' }}>
+        <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+          <AppTaskDay />
+          <AppCompany />
+          <AppPersonal />
+        </div>
+      </Content>
     </Layout>
   );
 };

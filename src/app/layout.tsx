@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AppHeader from '@/components/app.header';
 import AppFooter from '@/components/app.footer';
 import Container from 'react-bootstrap/Container';
-
+import AppSider from '@/components/app.sider';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -19,14 +20,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Next 13</title>
+      </head>
       <body className={inter.className}>
-        {/* <AppHeader /> */}
-        {/* <Container> */}
-        {children}
-        {/* </Container> */}
+        <Layout style={{ minHeight: '100vh' }}>
+          <AppHeader />
 
-        {/* <AppFooter /> */}
+          <Layout style={{ minHeight: '80vh' }}>
+            <AppSider />
+            <Layout>
+              {children}
+              <AppFooter />
+            </Layout>
+          </Layout>
+        </Layout>
       </body>
-    </html>
+    </html >
   )
 }
