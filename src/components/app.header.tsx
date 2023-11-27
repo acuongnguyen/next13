@@ -41,17 +41,19 @@ const items: MenuItem[] = [
 
 const AppHeader = () => {
     return (
-        <Header style={{ maxHeight: '10vh', backgroundColor: '#ffffff' }}>
-            <div className="logo" />
-            <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
-                <Link href={"/"} className="navbar-brand">MYS</Link>
+        <>
+            <Header style={{ maxHeight: '10vh', backgroundColor: '#ffffff' }}>
+                <div className="logo" />
+                <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
+                    <Link href={"/"} className="navbar-brand">MYS</Link>
 
-                <Menu.Item key="2">Sản phẩm</Menu.Item>
-                <Menu.Item key="3">Giới thiệu</Menu.Item>
-                <Menu.Item key="4">Search</Menu.Item>
-                {/* Thêm các Menu.Item khác nếu cần */}
-            </Menu>
-        </Header >
+                    <Menu.Item key="2">Sản phẩm</Menu.Item>
+                    <Menu.Item key="3">Giới thiệu</Menu.Item>
+                    <Menu.Item key="4">Search</Menu.Item>
+                    {/* Thêm các Menu.Item khác nếu cần */}
+                </Menu>
+            </Header >
+        </>
     );
 };
 

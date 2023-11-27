@@ -29,11 +29,13 @@ const Blog = (props: IProps) => {
         return <div>Loading...</div>
     }
     return (
-        <Layout>
-            <Content style={{ margin: '0 16px' }} className={styles.scrollableContent} >
-                <AppTable blogs={data} />
-            </Content>
-        </Layout>
+        <>
+            <Layout>
+                <Content style={{ margin: '0 16px' }} className={styles.scrollableContent} >
+                    <AppTable blogs={data} />
+                </Content>
+            </Layout>
+        </>
     )
 }
 export default Blog;

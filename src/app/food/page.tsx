@@ -7,6 +7,7 @@ import AppSider from '@/components/app.sider';
 import { Fragment, useState } from 'react';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import AppFood from '@/components/app.food';
+import { FoodItems } from '@/types/backend';
 const { Header, Content, Footer, Sider } = Layout;
 const Food = (props: FoodItems) => {
     const { foods } = props;
@@ -28,9 +29,11 @@ const Food = (props: FoodItems) => {
         return <div>Loading...</div>
     }
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <AppFood foods={data} />
-        </Layout>
+        <>
+            <Layout style={{ minHeight: '100vh' }}>
+                <AppFood foods={data} />
+            </Layout>
+        </>
     )
 }
 export default Food;

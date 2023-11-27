@@ -39,8 +39,7 @@ export const fetchCategory = async (dispatch: any) => {
                 };
             }
         );
-        console.log('data', data);
-        setCategories(mappedCategories);
+        // setCategories(mappedCategories);
         dispatch({
             type: "SET_CATEGORY",
             categories: mappedCategories,

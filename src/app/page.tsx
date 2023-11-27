@@ -19,29 +19,23 @@ import { fetchCategory } from '@/utils/function';
 const { Content } = Layout;
 
 const App = () => {
-  // const [{ foodItems, categories, filter, }, dispatch,] = useStateValue(); 
-  const [state, dispatch] = useStateValue();
-
-  useEffect(() => {
-    fetchCategory(dispatch);
-    console.log('11111111111111');
-  }, [dispatch]);
-
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Content style={{ margin: '0px 16px 50px 16px', overflowY: 'auto' }} className={styles.scrollableContent}>
-        <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-          <AppTaskDay />
-          <AppCompany />
-          <AppPersonal />
-        </div>
-      </Content>
-    </Layout>
+    <>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Content style={{ margin: '0px 16px 50px 16px', overflowY: 'auto' }} className={styles.scrollableContent}>
+          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+            <AppTaskDay />
+            <AppCompany />
+            <AppPersonal />
+          </div>
+        </Content>
+      </Layout>
+    </>
   );
 };
 export default App;

@@ -8,6 +8,9 @@ import Container from 'react-bootstrap/Container';
 import AppSider from '@/components/app.sider';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import '../styles/app.module.css';
+import { StateProvider } from '@/context/StateProvider';
+import { initialState } from '@/context/initialState';
+import reducer from '@/context/reducer';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -21,23 +24,25 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Next 13</title>
-      </head>
-      <body className={inter.className, styles.body}>
-        <Layout style={{ minHeight: '100vh' }} className={styles.scrollableContent}>
-          <AppHeader />
-          <Layout style={{ minHeight: '100vh' }} >
-            <AppSider />
-            <Layout style={{ minHeight: '90vh' }}>
-              {children}
-
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <html lang="en">
+        <head>
+          <title>Next 13</title>
+        </head>
+        <body className={inter.className, styles.scrollable}>
+          <>
+            <Layout style={{ minHeight: '100vh' }} className={styles.scrollableContent}>
+              <AppHeader />
+              <Layout style={{ minHeight: '100vh' }} >
+                <AppSider />
+                <Layout style={{ minHeight: '90vh' }}>
+                  {children}
+                </Layout>
+              </Layout>
             </Layout>
-
-          </Layout>
-        </Layout>
-      </body>
-    </html >
+          </>
+        </body>
+      </html >
+    </StateProvider>
   )
 }
