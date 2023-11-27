@@ -1,11 +1,13 @@
 'use client'
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
+import styles from './page.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppHeader from '@/components/app.header';
 import AppFooter from '@/components/app.footer';
 import Container from 'react-bootstrap/Container';
 import AppSider from '@/components/app.sider';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import '../styles/app.module.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -23,16 +25,16 @@ export default function RootLayout({
       <head>
         <title>Next 13</title>
       </head>
-      <body className={inter.className}>
-        <Layout style={{ minHeight: '100vh' }}>
+      <body className={inter.className, styles.body}>
+        <Layout style={{ minHeight: '100vh' }} className={styles.scrollableContent}>
           <AppHeader />
-
-          <Layout style={{ minHeight: '80vh' }}>
+          <Layout style={{ minHeight: '100vh' }} >
             <AppSider />
-            <Layout>
+            <Layout style={{ minHeight: '90vh' }}>
               {children}
-              <AppFooter />
+
             </Layout>
+
           </Layout>
         </Layout>
       </body>

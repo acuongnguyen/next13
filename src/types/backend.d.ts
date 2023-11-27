@@ -1,10 +1,15 @@
-interface IBlog {
+export type IBlog = {
     id: number,
     content: string,
     author: string,
     title: string
 };
-interface FoodItem {
+
+export type IProps = {
+    blogs: IBlog[]
+}
+
+export type FoodItem = {
     id: number;
     name: string;
     description?: string;
@@ -16,7 +21,25 @@ interface FoodItem {
     status: string;
     categoryId: string;
 };
-
-interface FoodItems {
-    items: FoodItem[];
+export type FoodItems = {
+    foods: FoodItem[];
 };
+
+export type DataType = {
+    key: React.Key;
+    name: string;
+    age?: number;
+    personal: string;
+    date: Date;
+    status?: string;
+    progress?: number;
+};
+
+export type FoodCategory = {
+    id: number;
+    name: string;
+    urlParam: string;
+    imageUrl: string;
+};
+
+export type FoodCategories = FoodCategory[];

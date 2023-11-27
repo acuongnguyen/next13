@@ -6,11 +6,9 @@ import RootLayout from '../layout';
 import AppSider from '@/components/app.sider';
 import { Fragment, useState } from 'react';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import AppFood from '@/components/app.food';
 const { Header, Content, Footer, Sider } = Layout;
-interface IProps {
-    foods: FoodItem[]
-}
-const Food = (props: IProps) => {
+const Food = (props: FoodItems) => {
     const { foods } = props;
     const fetcher = (url: string) => fetch(url)
         .then((res) => res.json());
@@ -31,7 +29,7 @@ const Food = (props: IProps) => {
     }
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <AppTable blogs={data} />
+            <AppFood foods={data} />
         </Layout>
     )
 }

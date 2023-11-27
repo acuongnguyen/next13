@@ -2,6 +2,7 @@
 import AppTable from '@/components/app.table';
 import { Button } from 'react-bootstrap';
 import useSWR from "swr";
+import styles from '../page.module.css';
 import RootLayout from '../layout';
 import AppSider from '@/components/app.sider';
 import { Fragment } from 'react';
@@ -30,8 +31,10 @@ const Blog = (props: IProps) => {
         return <div>Loading...</div>
     }
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <AppTable blogs={data} />
+        <Layout>
+            <Content style={{ margin: '0 16px' }} className={styles.scrollableContent} >
+                <AppTable blogs={data} />
+            </Content>
         </Layout>
     )
 }

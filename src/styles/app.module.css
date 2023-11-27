@@ -1,0 +1,18 @@
+.scrollableContent {
+    overflowY: auto;
+    height: calc(100vh - 64px);
+}
+
+.ant-layout-header {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.ant-layout-sider {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    height: calc(100vh - 64px);
+    z-index: 1000;
+}

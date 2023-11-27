@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, theme } from 'antd';
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { DataType } from '@/types/backend';
 const { Content } = Layout;
 const data: DataType[] = [];
 for (let i = 0; i < 33; i++) {
@@ -15,14 +16,7 @@ for (let i = 0; i < 33; i++) {
         status: `${i < 5 ? "Chưa hoàn thành" : "Đã hoàn thành"}`,
     });
 }
-interface DataType {
-    key: React.Key;
-    name: string;
-    age: number;
-    personal: string;
-    date: Date;
-    status: string;
-}
+
 
 const columns: ColumnsType<DataType> = [
     {
@@ -66,9 +60,9 @@ const columns: ColumnsType<DataType> = [
 const AppTaskDay = () => {
     return (
         <>
-            <Content>
-                <div style={{ fontWeight: '500', color: '#00009e' }}>Nhiệm vụ ngày</div>
-                <Table columns={columns} dataSource={data} scroll={{ x: 1200, y: 200 }} style={{}} />
+            <Content style={{ margin: '0 0 16px 0' }}>
+                <div style={{ fontWeight: '500', color: '#00009e', paddingBottom: '10px' }}>Nhiệm vụ ngày</div>
+                <Table columns={columns} dataSource={data} scroll={{ x: 1200, y: 200 }} style={{ boxShadow: '1px 1px 5px #888888', borderRadius: '10px' }} />
             </Content>
         </>
     )

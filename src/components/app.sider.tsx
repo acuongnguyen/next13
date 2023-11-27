@@ -5,9 +5,9 @@ import Link from 'next/link';
 import AppTable from '@/components/app.table';
 import React, { Fragment, useState } from 'react';
 import {
-    DesktopOutlined,
+    ApartmentOutlined,
     FileOutlined,
-    PieChartOutlined,
+    DeploymentUnitOutlined,
     TeamOutlined,
     UserOutlined,
     ShopOutlined,
@@ -16,7 +16,7 @@ import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import AppHeader from '@/components/app.header';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -31,13 +31,13 @@ function getItem(
         key,
         icon,
         children,
-        label: href ? <Link href={href}>{label}</Link> : label,
+        label: href ? <Link href={href} style={{ textDecoration: 'none' }}>{label}</Link> : label,
     } as MenuItem;
 }
 
 const items: MenuItem[] = [
-    getItem('Home', '1', '/', <PieChartOutlined />),
-    getItem('Blog', '2', '/blog', <DesktopOutlined />),
+    getItem('Home', '1', '/', <DeploymentUnitOutlined />),
+    getItem('Blog', '2', '/blog', <ApartmentOutlined />),
     getItem('Category', 'sub1', '', <ShopOutlined />, [
         getItem('Cá', '9035', '/food'),
         getItem('Gà', '3128', '/food'),
@@ -55,9 +55,9 @@ const AppSider = () => {
     } = theme.useToken();
 
     return (
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={{ backgroundColor: '#ffffff' }}>
             <div className="demo-logo-vertical" />
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+            <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
         </Sider>
     );
 };
