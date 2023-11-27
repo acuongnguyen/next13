@@ -7,10 +7,8 @@ import RootLayout from '../layout';
 import AppSider from '@/components/app.sider';
 import { Fragment } from 'react';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { IProps } from '../../types/backend';
 const { Header, Content, Footer, Sider } = Layout;
-interface IProps {
-    blogs: IBlog[]
-}
 const Blog = (props: IProps) => {
     const { blogs } = props;
     const fetcher = (url: string) => fetch(url)

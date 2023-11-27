@@ -1,9 +1,9 @@
 'use client'
 import Image from 'next/image'
-import styles from './page.module.css'
+import styles from './page.module.css';
 import Link from 'next/link';
 import AppTable from '@/components/app.table';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import AppHeader from '@/components/app.header';
@@ -13,9 +13,19 @@ import AppHome from '@/components/app.home';
 import AppTaskDay from '@/components/app.taskday';
 import AppCompany from '@/components/app.company';
 import AppPersonal from '@/components/app.personal';
-const { Header, Content, Footer, Sider } = Layout;
+import { useStateValue } from '@/context/StateProvider';
+import { fetchCategory } from '@/utils/function';
+
+const { Content } = Layout;
 
 const App = () => {
+  // const [{ foodItems, categories, filter, }, dispatch,] = useStateValue(); 
+  const [state, dispatch] = useStateValue();
+
+  useEffect(() => {
+    fetchCategory(dispatch);
+    console.log('11111111111111');
+  }, [dispatch]);
 
   const [collapsed, setCollapsed] = useState(false);
   const {
