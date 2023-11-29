@@ -1,5 +1,5 @@
 export const initialState = {
     foodItems: null,
     categories: null,
-    filter: 'all',
+    filter: '9035',
 }

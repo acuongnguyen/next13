@@ -3,9 +3,11 @@ import { Layout, theme } from 'antd';
 import { Table, Progress } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { DataType } from '@/types/backend';
+import employee from '../img/avatar.png';
+import Image from 'next/image';
 const { Content } = Layout;
 const data: DataType[] = [];
-for (let i = 1; i <= 50; i++) {
+for (let i = 1; i <= 6; i++) {
     const currentDate = new Date();
     const progress = Math.floor(Math.random() * 100);
     data.push({
@@ -17,11 +19,10 @@ for (let i = 1; i <= 50; i++) {
     });
 }
 
-
 const columns: ColumnsType<DataType> = [
     {
         title: 'STT',
-        width: 10,
+        width: 15,
         dataIndex: 'key',
         key: 'key',
         fixed: 'left',
@@ -38,12 +39,16 @@ const columns: ColumnsType<DataType> = [
         dataIndex: 'personal',
         key: '1',
         width: 30,
+        render: (text, record) => (
+            <Image src={employee} alt={`Employee ${record.key}`} width={24} height={24} />
+        ),
     },
     {
         title: 'Thời gian',
         dataIndex: 'date',
         key: '2',
         width: 40,
+        render: (text) => text || '-',
     },
     {
         title: 'Tiến độ',
@@ -58,12 +63,10 @@ const columns: ColumnsType<DataType> = [
 
 const AppCompany = () => {
     return (
-        <>
-            <Content style={{ margin: '16px 0' }}>
-                <div style={{ fontWeight: '500', color: '#00009e', paddingBottom: '10px' }}>Mục tiêu công ty</div>
-                <Table columns={columns} dataSource={data} scroll={{ x: 1200, y: 200 }} style={{ boxShadow: '1px 1px 5px #888888', borderRadius: '10px' }} />
-            </Content>
-        </>
+        <Content style={{ margin: '16px 0' }}>
+            <div style={{ fontWeight: '500', color: '#00009e', paddingBottom: '10px' }}>Mục tiêu công ty</div>
+            <Table columns={columns} dataSource={data} scroll={{ x: 1200, y: 550 }} style={{ boxShadow: '1px 1px 5px #888888', borderRadius: '10px' }} />
+        </Content>
     )
 }
 export default AppCompany;

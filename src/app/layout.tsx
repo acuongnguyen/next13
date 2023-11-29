@@ -24,8 +24,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <html lang="en">
+
+    <html lang="en">
+      <StateProvider initialState={initialState} reducer={reducer}>
         <head>
           <title>Next 13</title>
         </head>
@@ -42,7 +43,8 @@ export default function RootLayout({
             </Layout>
           </>
         </body>
-      </html >
-    </StateProvider>
+      </StateProvider>
+    </html >
+
   )
 }

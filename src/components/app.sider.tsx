@@ -1,78 +1,83 @@
 'use client'
-import Image from 'next/image'
-import styles from './page.module.css'
 import Link from 'next/link';
-import AppTable from '@/components/app.table';
-import React, { Fragment, useEffect, useState } from 'react';
-import {
-    ApartmentOutlined,
-    FileOutlined,
-    DeploymentUnitOutlined,
-    TeamOutlined,
-    UserOutlined,
-    ShopOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import AppHeader from '@/components/app.header';
+import { Layout, Menu, theme } from 'antd';
 import { useStateValue } from '@/context/StateProvider';
 import { fetchCategory, fetchFoodData } from '@/utils/function';
+import { useEffect, useState } from 'react';
+import Button from './filter/button';
+import Filters from './filter/filter';
 const { Sider } = Layout;
 
 const AppSider = () => {
-    const stateValues = useStateValue();
-    const [{ categories }, dispatch] = stateValues ? stateValues : [{}, () => { }];
-    useEffect(() => {
-        fetchCategory(dispatch);
-        console.log('11111111111111');
-    }, [dispatch]);
-    // const stateValue = useStateValue();
-    // const categories = stateValue && stateValue[0] ? stateValue[0].categories : null;
+    // const stateValues = useStateValue();
+    // const [{ categories }, dispatch] = stateValues ? stateValues : [{}, () => { }];
+    const [{ categories }, dispatch] = useStateValue();
     const [collapsed, setCollapsed] = useState(false);
+    const [filter, setFilter] = useState<string>('');
     const { token: { colorBgContainer } } = theme.useToken();
+    const fetchCategory = async () => {
+        const apiUrl = `https://vtda.online/api/v1/categories`;
 
-    type MenuItem = Required<MenuProps>['items'][number];
+        try {
+            const response = await fetch(apiUrl);
 
-    function getItem(
-        label?: React.ReactNode,
-        key?: React.Key,
-        href?: string,
-        icon?: React.ReactNode,
-        children?: MenuItem[],
-        onClick?: (categoryId: string) => void,
-    ): MenuItem {
-        return {
-            key,
-            icon,
-            children,
-            label: href ? (
-                <Link href={href} style={{ textDecoration: 'none' }}>{label}</Link>
-            ) : (
-                <div onClick={() => onClick && onClick(key?.toString())}>{label}</div>
-            ),
-        } as MenuItem;
-    }
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
 
-    function handleMenuItemClick(categoryId: string) {
-        fetchFoodData(dispatch, categoryId);
-    }
+            const data = await response.json();
+            const mappedCategories = data.map((category: any) => ({
+                id: category.id,
+                name: category.name,
+                urlParam: category.id,
+                imageUrl: category.imageUrl,
+            }));
 
-    const items: MenuItem[] = [
-        getItem('Trang chủ', '1', '/', <DeploymentUnitOutlined />),
-        getItem('Blog', '2', '/blog', <ApartmentOutlined />),
-        getItem('Category', 'sub1', '', <ShopOutlined />, categories ? categories.map((category: any) => (
-            getItem(category.name, category.id ? category.id.toString() : '', `/food/${category.id}`, undefined, undefined, handleMenuItemClick)
-        )) : []),
-        getItem('Team', 'sub2', '', < TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-        getItem('Files', '9', '/#', <FileOutlined />),
-    ];
+            dispatch({
+                type: "SET_CATEGORY",
+                categories: mappedCategories,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    console.log('categories ', categories);
+    useEffect(() => {
+        fetchCategory();
+    }, []);
     return (
-        <>
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={{ backgroundColor: '#ffffff' }}>
-                <div className="demo-logo-vertical" />
-                <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
-            </Sider>
-        </>
+        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={{ backgroundColor: '#ffffff' }}>
+            <div className="demo-logo-vertical" />
+            <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
+                <Menu.Item key="1">
+                    <Link href="/" style={{ textDecoration: 'none' }}>
+                        Trang chủ
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="2">
+                    <Link href="/blog" style={{ textDecoration: 'none' }}>
+                        Blog
+                    </Link>
+                </Menu.Item>
+                <Menu.SubMenu key="sub1" title="Category">
+                    {/* <Link href="/category" style={{ textDecoration: 'none' }}>
+                        Category
+                    </Link> */}
+                    <Filters categories={categories} filter={filter} setFilter={setFilter} />
+
+                </Menu.SubMenu>
+                {/* <Menu.SubMenu key="sub2" title="Team">
+                    <Menu.Item key="6">Team 1</Menu.Item>
+                    <Menu.Item key="8">Team 2</Menu.Item>
+                </Menu.SubMenu>
+                <Menu.Item key="9">
+                    <Link href="/#" style={{ textDecoration: 'none' }}>
+                        Files
+                    </Link>
+                </Menu.Item> */}
+            </Menu>
+        </Sider >
     );
 };
+
 export default AppSider;

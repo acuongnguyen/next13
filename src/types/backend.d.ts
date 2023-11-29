@@ -36,6 +36,7 @@ export type DataType = {
 };
 
 export type FoodCategory = {
+    map(arg0: (category: any) => import("react").JSX.Element): unknown;
     id: number;
     name: string;
     urlParam: string;

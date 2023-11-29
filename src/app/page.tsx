@@ -25,17 +25,15 @@ const App = () => {
   } = theme.useToken();
 
   return (
-    <>
-      <Layout style={{ minHeight: '100vh' }}>
-        <Content style={{ margin: '0px 16px 50px 16px', overflowY: 'auto' }} className={styles.scrollableContent}>
-          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-            <AppTaskDay />
-            <AppCompany />
-            <AppPersonal />
-          </div>
-        </Content>
-      </Layout>
-    </>
+    <Layout style={{ minHeight: '100vh' }}>
+      <Content style={{ margin: '0px 16px 50px 16px', overflowY: 'auto' }} className={styles.scrollableContent}>
+        <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+          <AppTaskDay />
+          <AppCompany />
+          <AppPersonal />
+        </div>
+      </Content>
+    </Layout>
   );
 };
 export default App;
